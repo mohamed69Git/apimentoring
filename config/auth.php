@@ -40,6 +40,21 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'session',
+            'provider' => 'admins'
+        ]
+    ],
+    /*
+     |-------------------------------------------------------------------------
+     |Here my roles array definition 
+     |-------------------------------------------------------------------------
+     */
+
+    'roles' => [
+        'student' => 'student',
+        'mentor' => 'mentor',
+        'super_admin' => 'super_admin'
     ],
 
     /*
@@ -64,6 +79,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => Apps\Models\Admins::class
+        ]
 
         // 'users' => [
         //     'driver' => 'database',
@@ -93,6 +112,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ]
     ],
 
     /*

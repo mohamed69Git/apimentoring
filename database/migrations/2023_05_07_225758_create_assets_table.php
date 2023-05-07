@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Formation;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,14 +14,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('assets', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->enum('role', ['student', 'mentor'])->default('student');
-            $table->rememberToken();
+            $table->string('content');
+            $table->foreignIdFor(Formation::class)->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->string('label');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('assets');
     }
 };
