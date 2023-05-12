@@ -51,11 +51,11 @@ return [
      |-------------------------------------------------------------------------
      */
 
-    'roles' => [
-        'student' => 'student',
-        'mentor' => 'mentor',
-        'super_admin' => 'super_admin'
-    ],
+    // 'role' => [
+    //     'student' => 'student',
+    //     'mentor' => 'mentor',
+    //     'super_admin' => 'super_admin'
+    // ],
 
     /*
     |--------------------------------------------------------------------------
