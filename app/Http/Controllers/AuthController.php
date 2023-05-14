@@ -26,11 +26,19 @@ class AuthController extends Controller
                 'errors' => 'emails ou mot de passe incorrect'
             ], 403);
         }
-        $user = User::where('email', $request->email)->with('roles')->first();
+        $user = User::where('email', $request->email)->with(['roles'])->first();
         $token = $user->createToken($user->email)->plainTextToken;
         return response()->json([
             'token' => $token,
-            'user' => $user->only(['id', 'email', 'full_name', 'roles'])
+            'user' => $user->only(['id', 'email', 'full_name', 'roles', 'is_mentor'])
+        ]);
+    }
+    //logout a user
+    public function logout()
+    {
+        Auth::user()->tokens()->delete();
+        return response()->json([
+            "message" => "logged out successfully"
         ]);
     }
 

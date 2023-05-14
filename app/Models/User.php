@@ -41,6 +41,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    protected $appends = ['is_mentor'];
     /**
      * Get all of the roles for the User
      *
@@ -56,12 +57,8 @@ class User extends Authenticatable
      * @param  string|array  $roles
      * @return bool
      */
-    public function isMentor()
+    public function getIsMentorAttribute(): bool
     {
-        foreach ($this->roles as $value) {
-            if ($value->label === "mentor")
-                return true;
-        }
-        return false;
+        return count($this->roles) === 2;
     }
 }

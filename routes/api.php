@@ -20,7 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/formations', [FormationController::class, 'getFormation']);
+    Route::post('/formations', [FormationController::class, 'addFormation']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
 //data: {email, password}
 Route::post('login', [AuthController::class, 'login']);
