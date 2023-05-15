@@ -13,7 +13,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $loginValidator = Validator::make($request->all(), [
-            'email' => 'required',
+            'email' => 'required|exists:users,email',
             'password' => 'required'
         ],);
         if ($loginValidator->fails()) {
@@ -34,9 +34,10 @@ class AuthController extends Controller
         ]);
     }
     //logout a user
-    public function logout()
+    public function logout(Request $request)
     {
-        Auth::user()->tokens()->delete();
+        Auth::guard('web')->logout();
+        $request->user()->tokens()->delete();
         return response()->json([
             "message" => "logged out successfully"
         ]);
