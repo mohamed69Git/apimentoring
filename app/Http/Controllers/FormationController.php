@@ -18,7 +18,7 @@ class FormationController extends Controller
     public function addFormation(Request $request)
     {
         $formationValidator = Validator::make($request->all(), [
-            'label' => ['required', 'exists:formations,label'],
+            'label' => ['required', 'unique:formations,label'],
             'plan' => ['required', Rule::in(['paid', 'free'])],
             'length' => ['required'],
             'level' => Rule::in(['beginner', 'confirmed', 'expert'])
