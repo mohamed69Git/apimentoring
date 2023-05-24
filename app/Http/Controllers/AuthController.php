@@ -62,6 +62,6 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->save();
         $token = $user->createToken($user->email)->plainTextToken;
-        return response()->json(['response' => $user->full_name . ' created successfully', 'user' => $user->only(['full_name', 'email']), 'token' => $token]);
+        return response()->json(['response' => $user->full_name . ' created successfully', 'user' => $user, 'token' => $token]);
     }
 }
