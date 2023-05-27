@@ -12,7 +12,7 @@ class FormationController extends Controller
 {
     public function getFormation()
     {
-        return response()->json(Formation::paginate(1));
+        return response()->json(Formation::paginate(8));
     }
 
     public function addFormation(Request $request)

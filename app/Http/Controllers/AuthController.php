@@ -48,8 +48,9 @@ class AuthController extends Controller
     {
         $registerValidator = Validator::make($request->all(), [
             'email' => 'required',
-            'password' => 'required',
-            'full_name' => 'required'
+            'password' => 'required|confirmed',
+            'full_name' => 'required',
+            'password_confirmation' => 'required'
         ]);
         if ($registerValidator->fails()) {
             return response()->json([
