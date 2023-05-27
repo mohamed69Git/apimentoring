@@ -21,6 +21,7 @@ class User extends Authenticatable
         'full_name',
         'email',
         'password',
+        'state'
     ];
 
     /**
@@ -31,6 +32,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'roles',
     ];
 
     /**
@@ -41,7 +43,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    protected $appends = ['is_mentor'];
+    // protected $appends = ['state'];
     /**
      * Get all of the roles for the User
      *
@@ -57,8 +59,8 @@ class User extends Authenticatable
      * @param  string|array  $roles
      * @return bool
      */
-    public function getIsMentorAttribute(): bool
-    {
-        return count($this->roles) === 2;
-    }
+    // public function getStateAttribute(): bool
+    // {
+    //     return $this->state;
+    // }
 }
