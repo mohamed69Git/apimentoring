@@ -18,17 +18,11 @@
 
 ![Alt Text](public/images/capturetest/8.png)
 
-### Route ajouter une nouvelle formation _avec_ ajout du _token Bearer pour_
-
-## <span style="color: yellow">http://127.0.0.1:8000/api/new-formation</span>
-
-![Alt Text](public/images/capturetest/4.png)
-
 ### Route pour recupere toutes les formations
 
-![Alt Text](public/images/capturetest/7.png)
-
 ## <span style="color:yellow">http://127.0.0.1:8000/api/get-formations</span>
+
+![Alt Text](public/images/capturetest/7.png)
 
 ### Route pour se deconnecter _ajout_ du token dans l'onglet _Auth_
 
