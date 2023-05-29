@@ -19,7 +19,7 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
-        $user = User::where('email', Auth::user()->email)->first();
+        $user = $request->user();
         if (!$user->isMentor()) {
             abort(403, "User not authorized");
         }

@@ -18,19 +18,29 @@ class FormationController extends Controller
     public function addFormation(Request $request)
     {
         $formationValidator = Validator::make($request->all(), [
-            'label' => ['required', 'unique:formations,label'],
-            'plan' => ['required', Rule::in(['paid', 'free'])],
-            'length' => ['required'],
+            'label' => 'required|unique:formations,label',
+            'plan' => 'required', Rule::in(['paid', 'free']),
+            'length' => 'required',
             'level' => Rule::in(['beginner', 'confirmed', 'expert'])
         ]);
         if ($formationValidator->fails())
             return response()->json([
-                'errors' => $formationValidator->errors()
+                'errors' => $formationValidator->errors(),
             ]);
-        $formation  = Formation::create($request->input());
+        $formation  = new Formation();
+        $formation->label = $request->label;
+        $formation->plan = $request->plan;
+        $formation->length = $request->length;
+        $formation->user_id = $request->user()->id;
+        $formation->level = $request->level;
+        $formation->save();
         return response()->json([
+            'message' => 'Formation ajoutee avec success',
             'formation' => $formation
         ]);
-        return response()->json($request->input());
+    }
+    public function getMyFormation(Request $request)
+    {
+        return response()->json($request->user()->formations);
     }
 }

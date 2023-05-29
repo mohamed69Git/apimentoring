@@ -62,7 +62,7 @@ class User extends Authenticatable
      */
     public function isMentor()
     {
-        return $this->state == 'validated';
+        return count($this->roles) > 1;
     }
 
     /**
