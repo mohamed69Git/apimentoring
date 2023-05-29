@@ -19,7 +19,7 @@ class AuthController extends Controller
         if ($loginValidator->fails()) {
             return response()->json([
                 'errors' => $loginValidator->errors()
-            ], 403);
+            ], 422);
         }
         if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json([
@@ -30,7 +30,7 @@ class AuthController extends Controller
         $token = $user->createToken($user->email)->plainTextToken;
         return response()->json([
             'token' => $token,
-            'user' => $user->only(['id', 'email', 'full_name', 'roles', 'is_mentor'])
+            'user' => $user
         ]);
     }
     //logout a user
@@ -47,20 +47,27 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $registerValidator = Validator::make($request->all(), [
-            'email' => 'required',
-            'password' => 'required|confirmed',
+            'email' => 'required|unique:users,email',
+            'password' => 'required|confirmed|string|size:8',
             'full_name' => 'required',
             'password_confirmation' => 'required'
         ]);
         if ($registerValidator->fails()) {
             return response()->json([
+                /**
+                 * pour verifier si un champs occasionne des errors, on peut
+                 * faire errors->has('<cham>')
+                 * pour recuperer et afficher le message, on fait: 
+                 * errors->first('<champ>')
+                 */
                 'errors' => $registerValidator->errors()
-            ], 403);
+            ], 422);
         }
         $user = new User();
         $user->full_name = $request->full_name;
         $user->password = bcrypt($request->password);
         $user->email = $request->email;
+        $user->state = 'not-validated';
         $user->save();
         $token = $user->createToken($user->email)->plainTextToken;
         return response()->json(['response' => $user->full_name . ' created successfully', 'user' => $user, 'token' => $token]);

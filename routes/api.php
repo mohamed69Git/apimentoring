@@ -25,6 +25,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/new-query', [DemandeController::class, 'newQuery']);
     Route::get('/get-formations', [FormationController::class, 'getFormation']);
+    Route::get('/get-my-formations', [FormationController::class, 'getMyFormation'])->middleware('role:mentor');
 });
 //data: {email, password}
 Route::post('login', [AuthController::class, 'login']);
