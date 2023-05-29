@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\FormationController;
@@ -20,13 +21,23 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+//users
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/new-formation', [FormationController::class, 'addFormation']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    //ajouter une demande pour devenir mentor
     Route::post('/new-query', [DemandeController::class, 'newQuery']);
     Route::get('/get-formations', [FormationController::class, 'getFormation']);
     Route::get('/get-my-formations', [FormationController::class, 'getMyFormation'])->middleware('role:mentor');
 });
+//admins
+Route::prefix('/admin')
+    ->middleware(['auth:sanctum', 'admin'])->group(function () {
+        Route::post('/login', [AdminController::class, 'login'])->withoutMiddleware(['auth:sanctum', 'admin']);
+        Route::post('/logout', [AdminController::class, 'logout']);
+        //pour valider une demande
+        Route::post('/validate/{user}/{demande}', [DemandeController::class, 'validateQuery']);
+    });
 //data: {email, password}
 Route::post('login', [AuthController::class, 'login']);
 //data: {email, password, full_name}

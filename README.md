@@ -35,3 +35,15 @@
 ## <span style="color: yellow">http://127.0.0.1:8000/api/logout</span>
 
 ![Alt Text](public/images/capturetest/6.png)
+
+### Route pour ajouter une demande
+
+## <span style="color: yellow">http://127.0.0.1:8000/api/new-query</span>
+
+![Alt Text](public/images/capturetest/9.png)
+
+### Route administrateur pour valider une demande
+
+## <span style="color: yellow">http://127.0.0.1:8000/api/admin/validate/{user}/{demande}</span>
+
+![Alt Text](public/images/capturetest/10.png)

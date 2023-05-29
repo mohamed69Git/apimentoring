@@ -21,7 +21,7 @@ class AuthController extends Controller
                 'errors' => $loginValidator->errors()
             ], 422);
         }
-        if (!Auth::attempt($request->only('email', 'password'))) {
+        if (!Auth::guard('web')->attempt($request->only('email', 'password'))) {
             return response()->json([
                 'errors' => 'emails ou mot de passe incorrect'
             ], 403);
