@@ -43,4 +43,13 @@ class Formation extends Model
     {
         return $this->belongsTo(User::class);
     }
+    /**
+     * Get the calendar that owns the Formation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function calendar(): BelongsTo
+    {
+        return $this->belongsTo(Calendar::class);
+    }
 }
