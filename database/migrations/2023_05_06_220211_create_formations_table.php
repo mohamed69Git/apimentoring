@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string("label")->unique();
             $table->enum("plan", ["free", "paid"]);
-            $table->integer("length");
             $table->enum("level", ["beginner", "confirmed", "expert"])->default('beginner');
             $table->foreignIdFor(User::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('description')->nullable();
             $table->enum('state', ['on-going', 'finished', 'waiting'])->default('waiting');
             $table->foreignIdFor(Calendar::class)->constrained()->onUpdate(null)->onDelete(null);
+            $table->foreignIdFor(CategoryFormation::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

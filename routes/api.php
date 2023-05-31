@@ -37,6 +37,7 @@ Route::prefix('/admin')
         Route::post('/logout', [AdminController::class, 'logout']);
         //pour valider une demande
         Route::post('/validate/{user}/{demande}', [DemandeController::class, 'validateQuery']);
+        Route::get('get-demandes', [DemandeController::class, 'getDemande']);
     });
 //data: {email, password}
 Route::post('login', [AuthController::class, 'login']);

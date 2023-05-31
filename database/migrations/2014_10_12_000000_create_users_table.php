@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['student', 'mentor'])->default('student');
+            $table->enum('state', ['pending', 'validated', 'not-validated'])->default('not-validated');
             $table->rememberToken();
             $table->timestamps();
         });

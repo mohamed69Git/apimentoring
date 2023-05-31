@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Calendar;
 use App\Models\Formation;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,19 +21,30 @@ class FormationController extends Controller
         $formationValidator = Validator::make($request->all(), [
             'label' => 'required|unique:formations,label',
             'plan' => 'required', Rule::in(['paid', 'free']),
-            'length' => 'required',
-            'level' => Rule::in(['beginner', 'confirmed', 'expert'])
+            'level' => Rule::in(['beginner', 'confirmed', 'expert']),
+            'start_date' => 'date',
+            'end_date' => 'date',
+            'description_formation' => 'string',
+            'description_calendar' => 'string'
+
         ]);
         if ($formationValidator->fails())
             return response()->json([
                 'errors' => $formationValidator->errors(),
             ]);
+
+        $calendar = new Calendar();
+        $calendar->start_date = isset($request->start_date) ? $request->start_date : null;
+        $calendar->end_date = isset($request->end_date) ? $request->end_date : null;
+        $calendar->description = isset($request->description) ? $request->description : null;
+        $calendar->save();
         $formation  = new Formation();
+        $formation->calendar_id = $calendar->id;
         $formation->label = $request->label;
         $formation->plan = $request->plan;
-        $formation->length = $request->length;
         $formation->user_id = $request->user()->id;
         $formation->level = $request->level;
+        $formation->description = isset($request->description) ? $request->description : null;
         $formation->save();
         return response()->json([
             'message' => 'Formation ajoutee avec success',

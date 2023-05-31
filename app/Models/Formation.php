@@ -27,13 +27,6 @@ class Formation extends Model
     {
         return $this->length > 10;
     }
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function () {
-            Log::info("Formation added successfully");
-        });
-    }
     /**
      * Get the user that owns the Formation
      *
@@ -43,6 +36,7 @@ class Formation extends Model
     {
         return $this->belongsTo(User::class);
     }
+    protected $with = ['calendar'];
     /**
      * Get the calendar that owns the Formation
      *

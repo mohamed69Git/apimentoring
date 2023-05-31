@@ -65,4 +65,11 @@ class DemandeController extends Controller
             ]);
         }
     }
+    /**
+     * Recuperer tous les demandes
+     */
+    public function getDemande()
+    {
+        return Demande::with('user')->paginate(3);
+    }
 }
