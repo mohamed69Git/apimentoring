@@ -47,3 +47,9 @@
 ## <span style="color: yellow">http://127.0.0.1:8000/api/admin/validate/{user}/{demande}</span>
 
 ![Alt Text](public/images/capturetest/10.png)
+
+### Route pour ajouter un ou plusieurs horaires de mentoring
+
+## <span style="color: yellow">http://127.0.0.1:8000/api/new-schedule/{calendar}</span>
+
+![Alt Text](public/images/capturetest/11.png)

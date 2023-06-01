@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\FormationController;
+use App\Http\Controllers\SchedulerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/new-query', [DemandeController::class, 'newQuery']);
     Route::get('/get-formations', [FormationController::class, 'getFormation']);
     Route::get('/get-my-formations', [FormationController::class, 'getMyFormation'])->middleware('role:mentor');
+    Route::post('/new-schedule/{calendar}', [SchedulerController::class, 'newSchedule']);
 });
 //admins
 Route::prefix('/admin')

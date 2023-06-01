@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Scheduler extends Model
 {
     use HasFactory;
+    protected $fillable = ['start_time', 'end_time', 'calendar_id', 'description', 'title'];
     /**
      * Get the calendar that owns the Scheduler
      *

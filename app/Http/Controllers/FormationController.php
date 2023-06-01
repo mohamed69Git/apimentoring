@@ -6,6 +6,7 @@ use App\Models\Calendar;
 use App\Models\Formation;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -19,13 +20,16 @@ class FormationController extends Controller
     public function addFormation(Request $request)
     {
         $formationValidator = Validator::make($request->all(), [
-            'label' => 'required|unique:formations,label',
+            'label' => ['required', Rule::unique('formations', 'label')->where(function ($query) use ($request) {
+                return $query->where(DB::raw('LOWER(label)'), strtolower($request->label));
+            })],
             'plan' => 'required', Rule::in(['paid', 'free']),
             'level' => Rule::in(['beginner', 'confirmed', 'expert']),
             'start_date' => 'date',
             'end_date' => 'date',
             'description_formation' => 'string',
-            'description_calendar' => 'string'
+            'description_calendar' => 'string',
+            'category_formation' => 'required|numeric'
 
         ]);
         if ($formationValidator->fails())
@@ -45,6 +49,7 @@ class FormationController extends Controller
         $formation->user_id = $request->user()->id;
         $formation->level = $request->level;
         $formation->description = isset($request->description) ? $request->description : null;
+        $formation->category_formation_id = $request->category_formation;
         $formation->save();
         return response()->json([
             'message' => 'Formation ajoutee avec success',
