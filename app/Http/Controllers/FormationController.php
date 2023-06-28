@@ -48,7 +48,7 @@ class FormationController extends Controller
         $formation->plan = $request->plan;
         $formation->user_id = $request->user()->id;
         $formation->level = $request->level;
-        $formation->description = isset($request->description) ? $request->description : null;
+        $formation->description = isset($request->description_formation) ? $request->description_formation : null;
         $formation->category_formation_id = $request->category_formation;
         $formation->save();
         return response()->json([

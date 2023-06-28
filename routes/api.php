@@ -45,3 +45,9 @@ Route::prefix('/admin')
 Route::post('login', [AuthController::class, 'login']);
 //data: {email, password, full_name}
 Route::post('register', [AuthController::class, 'register']);
+
+//Route for testing api 
+//Route for testing api 
+Route::get('get-magic-number', function () {
+    return response()->json(['your magic number' => random_int(1, 100)]);
+});

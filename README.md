@@ -14,6 +14,8 @@
 
 ### Route ajouter une nouvelle formation _sans_ ajout obligatoire du _token Bearer pour_
 
+#### <span style="color: red">dans l'objet formation: ajoute le champ _'description_formation'_ qui representera la description de la formation</span>
+
 ## <span style="color: yellow">http://127.0.0.1:8000/api/new-formation</span>
 
 ![Alt Text](public/images/capturetest/8.png)
