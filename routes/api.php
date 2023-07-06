@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryFormationController;
 use App\Http\Controllers\DemandeController;
 use App\Http\Controllers\FormationController;
 use App\Http\Controllers\SchedulerController;
+use App\Models\CategoryFormation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +34,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/get-my-formations', [FormationController::class, 'getMyFormation'])->middleware('role:mentor');
     Route::post('/new-schedule/{calendar}', [SchedulerController::class, 'newSchedule']);
 });
+Route::get("/get-categories", [CategoryFormationController::class, 'getCategory']);
 //admins
 Route::prefix('/admin')
     ->middleware(['auth:sanctum', 'admin'])->group(function () {
