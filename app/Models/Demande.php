@@ -21,6 +21,7 @@ class Demande extends Model
         return $this->belongsTo(User::class);
     }
 
+    protected $with=['categoriy_formations'];
     public function categoriy_formations() : BelongsToMany
     {
         return $this->belongsToMany(CategoryFormation::class, 'demande_categories');
