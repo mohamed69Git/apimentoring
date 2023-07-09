@@ -74,4 +74,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Formation::class);
     }
+
+    public function job_categories(){
+        return $this->belongsToMany(JobCategory::class, 'user_has_job_categories');
+    }
+
+    public function demande(){
+        return $this->hasOne(Demande::class);
+    }
 }

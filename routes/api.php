@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //users
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/new-formation', [FormationController::class, 'addFormation']);
+    Route::post('/new-formation', [FormationController::class, 'addFormation'])->middleware('role:mentor');
     Route::post('/logout', [AuthController::class, 'logout']);
     //ajouter une demande pour devenir mentor
     Route::post('/new-query', [DemandeController::class, 'newQuery']);

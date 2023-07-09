@@ -30,7 +30,7 @@ class Formation extends Model
     {
         return $this->belongsTo(User::class);
     }
-    protected $with = ['calendar'];
+    protected $with = ['calendar', 'days'];
     /**
      * Get the calendar that owns the Formation
      *
@@ -39,5 +39,8 @@ class Formation extends Model
     public function calendar(): BelongsTo
     {
         return $this->belongsTo(Calendar::class);
+    }
+    public function days(){
+        return $this->belongsToMany(DaysFormation::class, 'formation_has_day_formations');
     }
 }
